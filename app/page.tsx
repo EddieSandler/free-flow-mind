@@ -39,13 +39,13 @@ export default function MindfulFlowApp() {
 
   return (
     <div className="container mx-auto p-4 max-w-4xl">
-      <h1 className="text-3xl font-bold text-center mb-6">Mindful Flow: Your Spiritual Companion</h1>
+      <h1 className="text-3xl font-bold text-center mb-6">Free Flow Mind: Allow your thoughts to flow freely</h1>
 
       <Tabs defaultValue="daily" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="daily">Daily Tracking</TabsTrigger>
           <TabsTrigger value="goals">Goals</TabsTrigger>
-          <TabsTrigger value="reflection">Reflection</TabsTrigger>
+          <TabsTrigger value="reflection">End of Day Review</TabsTrigger>
         </TabsList>
 
         <TabsContent value="daily">
@@ -116,6 +116,7 @@ export default function MindfulFlowApp() {
               </CardContent>
             </Card>
           </div>
+{/* Today's Tasks */}
 
           {/* Spiritual & Mindfulness Section */}
           <div className="grid md:grid-cols-2 gap-4 mt-4">
@@ -145,6 +146,39 @@ export default function MindfulFlowApp() {
               </CardContent>
             </Card>
           </div>
+          
+<Card>
+              <CardHeader>
+                <CardTitle>My Call List</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2">
+                  {callList.map((call, index) => (
+                    <li key={index} className="flex justify-between items-center">
+                      {call}
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        onClick={() => removeItemFromList(setCallList)(call)}
+                      >
+                        Remove
+                      </Button>
+                    </li>
+                  ))}
+                </ul>
+                <Input
+                  placeholder="Add Name and Number"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      const inputElement = e.target as HTMLInputElement;
+                      addItemToList(setCallList)(inputElement.value);
+                      inputElement.value = '';
+                    }
+                  }}
+                />
+              </CardContent>
+            </Card>
+
         </TabsContent>
 
         <TabsContent value="goals">
